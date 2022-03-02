@@ -1,5 +1,5 @@
 from model.tool.draw_box_in_img import STANDARD_COLORS
-from model.YOLOF import YOLOF, DetectHead
+from model.GiraffeDet import GiraffeDet, DetectHead
 from model.tool.timer import Timer
 import config as cfg
 
@@ -11,8 +11,8 @@ import cv2
 
 input_ = tf.placeholder(tf.float32, shape = [1, cfg.image_size, cfg.image_size, 3])
 
-out, all_anchors = YOLOF(base_anchor=cfg.base_anchor,
- scale=cfg.scale, aspect_ratio=cfg.aspect_ratio, class_num=len(cfg.classes)-1, is_training=False).forward(input_)
+out, all_anchors = GiraffeDet(base_anchor=cfg.base_anchor,
+ scale=cfg.scale, aspect_ratio=cfg.aspect_ratio, class_num=len(cfg.classes)-1, is_training=True).forward(input_)
 
 with tf.name_scope('detection'): 
     # print('out', out)
