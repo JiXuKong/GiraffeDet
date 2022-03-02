@@ -1,7 +1,7 @@
 from model.tool.regress_target import reverse_regress_target_tf
 from data.pascal_voc import pascal_voc
 from model.tool.timer import Timer
-from model.YOLOF import YOLOF, DetectHead
+from model.GiraffeDet import GiraffeDet, DetectHead
 from model.Loss import Loss
 from evalue import voc_eval
 import config as cfg 
@@ -22,8 +22,8 @@ input_ = tf.placeholder(tf.float32, shape = [1, cfg.image_size, cfg.image_size, 
 get_boxes = tf.placeholder(tf.float32, shape = [1, 80, 5])
 num_boxes = tf.placeholder(tf.int32, shape = [1,])
 imsize = tf.placeholder(tf.float32, shape = [None,])
-out, all_anchors = YOLOF(base_anchor=cfg.base_anchor,
- scale=cfg.scale, aspect_ratio=cfg.aspect_ratio, class_num=len(cfg.classes)-1, is_training=False).forward(input_)
+out, all_anchors = GiraffeDet(base_anchor=cfg.base_anchor,
+ scale=cfg.scale, aspect_ratio=cfg.aspect_ratio, class_num=len(cfg.classes)-1, is_training=True).forward(input_)
 
 total_loss, regularization_loss, loc_loss, cls_loss, normalizer, matches = Loss(get_boxes, num_boxes,
  out, all_anchors, imsize)._loss() 
