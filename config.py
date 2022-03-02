@@ -49,7 +49,7 @@ with open(test_img_txt, 'r') as f:
 test_num = len(image_index)
 # test_num = 341//batch_size
 class_num = len(classes)
-image_size = 640#currently only
+image_size = 640
 feature_size = [[image_size//(2**i), image_size//(2**i)] for i in range(3,8)]
 phase = True
 base_anchor = [32, 64, 128, 256, 512]
