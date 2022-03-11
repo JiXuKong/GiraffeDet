@@ -123,8 +123,10 @@ class TDQueen(object):
 
             if skip_P7 is not None:
                 P7_ = tf.concat([skip_P7, P7, P6_d], axis=-1, name="P7P6_d")
+                P7_ = conv2d(P7_, self.dim, 1, scope='Projectionskip_P7P7P6_dCat')
             else:
                 P7_ = tf.concat([P7, P6_d], axis=-1, name="P7P6_d")
+                P7_ = conv2d(P7_, self.dim, 1, scope='ProjectionP7P6_dCat')
             P7_f = conv_bn_act(P7_, self.dim, scope='P7_f')
 
             P7_u_ = upsample_layer(P7_, tf.shape(P6)[1:3], scope='P7_UpSample')
