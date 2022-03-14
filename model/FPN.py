@@ -98,6 +98,7 @@ class BUQueen(object):
                 P7_ = tf.concat([skip_P7, P7, P6_d, P6_d_], axis=-1, name="P7P6_d")
             else:
                 P7_ = tf.concat([P7, P6_d, P6_d_], axis=-1, name="P7P6_d")
+            P7_ = conv2d(P7_, self.dim, 1, scope='ProjectionP7P6_dP6_d_Cat')
             P7_f = conv_bn_act(P7_, self.dim, scope='P7_f')
             
             return [P3_f, P4_f, P5_f, P6_f, P7_f]
